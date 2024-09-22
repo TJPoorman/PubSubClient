@@ -8,6 +8,15 @@ namespace PubSubClient;
 
 public static class StartupExtensions
 {
+    /// <summary>
+    /// Adds consumer service(s) to the application's dependency injection container.
+    /// </summary>
+    /// <typeparam name="TConsumerService">The type of the consumer provider to add, which must implement <see cref="IConsumerService"/>.</typeparam>
+    /// <param name="builder">The <see cref="IHostApplicationBuilder"/> instance to which the consumer services is added.</param>
+    /// <returns>The updated <see cref="IHostApplicationBuilder"/> instance.</returns>
+    /// <remarks>
+    /// This method registers the methods marked by <see cref="ConsumerMethodAttribute"/> to the <see cref="AsyncConsumerBackgroundService"/>.
+    /// </remarks>
     public static IHostApplicationBuilder AddConsumerServices<TConsumerService>(this IHostApplicationBuilder builder)
     where TConsumerService : IConsumerService
     {
@@ -56,6 +65,15 @@ public static class StartupExtensions
         return builder;
     }
 
+    /// <summary>
+    /// Adds a publisher service(s) to the application's dependency injection container.
+    /// </summary>
+    /// <typeparam name="TPublisherService">The type of the publisher provider to add, which must implement <see cref="IPublisherService"/>.</typeparam>
+    /// <param name="builder">The <see cref="IHostApplicationBuilder"/> instance to which the publisher service is added.</param>
+    /// <returns>The updated <see cref="IHostApplicationBuilder"/> instance.</returns>
+    /// <remarks>
+    /// This method registers the specified caching provider type <typeparamref name="TPublisherService"/> as a singleton in the service collection.
+    /// </remarks>
     public static IHostApplicationBuilder AddPublisherService<TPublisherService>(this IHostApplicationBuilder builder)
         where TPublisherService : class, IPublisherService
     {

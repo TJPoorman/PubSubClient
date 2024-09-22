@@ -5,25 +5,34 @@ using System.Reflection;
 namespace PubSubClient.Attributes;
 
 /// <summary>
-/// An attribute used to specify the behavior of the consumer that should pass messages to this method
+/// An attribute used to specify a consumer method to be executed when a message with the defined definition is received.
 /// </summary>
-/// <remarks>
-/// </remarks>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 public class ConsumerMethodAttribute : Attribute
 {
     private static readonly ConcurrentDictionary<Type, Func<IMicroServiceDefinition>> _serviceDefinitionConstructorDelegates = new();
-    private int _hashCode = 0;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConsumerMethodAttribute"/> class.
+    /// This attribute is used to decorate a method that is executed when a message is received.
+    /// The <paramref name="serviceDefinitionType"/> must implement the <see cref="IMicroServiceDefinition"/>
+    /// interface to ensure that only compatible message handlers are used.
+    /// </summary>
     /// <param name="serviceDefinitionType">Specified type must implement <see cref="IMicroServiceDefinition" /></param>
+    /// <exception cref="ArgumentException">
+    /// Thrown when <paramref name="serviceDefinitionType"/> does not implement <see cref="IMicroServiceDefinition"/>.
+    /// </exception>
     public ConsumerMethodAttribute(Type serviceDefinitionType)
     {
         ServiceDefinition = CreateMicroServiceDefinition(serviceDefinitionType);
     }
 
+    /// <summary>
+    /// The definition used by the method to receive messages as a consumer.
+    /// </summary>
     public virtual IMicroServiceDefinition ServiceDefinition { get; protected set; }
 
-    public static IMicroServiceDefinition CreateMicroServiceDefinition(Type serviceDefinitionType)
+    static IMicroServiceDefinition CreateMicroServiceDefinition(Type serviceDefinitionType)
     {
         if (!typeof(IMicroServiceDefinition).IsAssignableFrom(serviceDefinitionType))
         {
@@ -45,27 +54,7 @@ public class ConsumerMethodAttribute : Attribute
         return constructorDelegate();
     }
 
-    public override bool Equals(object? obj)
-    {
-        if (obj is null) return false;
-
-        return _hashCode == obj.GetHashCode();
-    }
-
-    public override int GetHashCode()
-    {
-        if (_hashCode == 0)
-        {
-            _hashCode = new
-            {
-                ServiceDefinition?.ExchangeName,
-                ServiceDefinition?.RoutingKey
-            }.GetHashCode();
-        }
-
-        return _hashCode;
-    }
-
+    /// <inheritdoc/>
     public override string ToString()
     {
         return $@"{nameof(ServiceDefinition.ExchangeName)}: {ServiceDefinition.ExchangeName}

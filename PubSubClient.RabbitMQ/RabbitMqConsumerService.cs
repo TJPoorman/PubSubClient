@@ -7,6 +7,10 @@ using System.Text.Json;
 
 namespace PubSubClient.RabbitMQ;
 
+/// <inheritdoc/>
+/// <remarks>
+/// This implementation uses RabbitMQ as the broker for consumer.
+/// </remarks>
 public class RabbitMqConsumerService : IConsumerService, IDisposable
 {
     private readonly ILogger<RabbitMqConsumerService> _logger;
@@ -17,6 +21,18 @@ public class RabbitMqConsumerService : IConsumerService, IDisposable
     private readonly static Lazy<Assembly> _assembly = new(() => Assembly.GetEntryAssembly() ?? Assembly.GetCallingAssembly());
     private readonly bool _twoParam;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RabbitMqConsumerService" class./>
+    /// This constructor is intended for use by Dependency Injection and should be used in conjunction with the
+    /// <see cref="StartupExtensions.AddConsumerServices{TConsumerService}(Microsoft.Extensions.Hosting.IHostApplicationBuilder)"/> method and not called directly.
+    /// </summary>
+    /// <param name="logger">The logger instance for logging cache operations.</param>
+    /// <param name="config">The application's configuration settings.</param>
+    /// <param name="definition">The <see cref="IMicroServiceDefinition"/> to receive messages from.</param>
+    /// <param name="action">The <see cref="Delegate"/> used to specify the method to execute when a message is received.</param>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown when the configuration of the Message Broker is not provided or is invalid.
+    /// </exception>
     public RabbitMqConsumerService(ILogger<RabbitMqConsumerService> logger, IConfiguration config, IMicroServiceDefinition definition, Delegate action)
     {
         _logger = logger;
@@ -36,6 +52,7 @@ public class RabbitMqConsumerService : IConsumerService, IDisposable
         _logger.LogDebug("Declared/Bound queue: {Exchange} | {QueueName} | {RoutingKey}", definition.ExchangeName, _queueName, definition.RoutingKey);
     }
 
+    /// <inheritdoc/>
     public async Task ReadMessages(CancellationToken token)
     {
         var consumer = new AsyncEventingBasicConsumer(_model);
@@ -64,6 +81,7 @@ public class RabbitMqConsumerService : IConsumerService, IDisposable
         await Task.CompletedTask;
     }
 
+    /// <inheritdoc/>
     public void Dispose()
     {
         if (_model.IsOpen) _model.Close();

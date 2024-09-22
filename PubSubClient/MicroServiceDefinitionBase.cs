@@ -12,8 +12,12 @@ public abstract class MicroServiceDefinitionBase : IMicroServiceDefinition
     private ServicePool _pool;
     private string? _routingKey;
 
+    /// <inheritdoc/>
     public abstract string ExchangeName { get; }
 
+    /// <summary>
+    /// A separate pool used to differentiate the same definition used by different processing services.
+    /// </summary>
     public ServicePool Pool
     {
         get => _pool;
@@ -30,8 +34,12 @@ public abstract class MicroServiceDefinitionBase : IMicroServiceDefinition
         }
     }
 
+    /// <summary>
+    /// A <see cref="string"/> representation of the queue to use for receiving messages.
+    /// </summary>
     public string QueueName => $"{GetType()?.FullName}-{_assembly.Value.GetName().Name}";
 
+    /// <inheritdoc/>
     public virtual string RoutingKey
     {
         get
@@ -56,9 +64,6 @@ public abstract class MicroServiceDefinitionBase : IMicroServiceDefinition
         }
     }
 
-    /// <summary>
-    /// Returns a <see cref="string"/> representation of the definition.
-    /// </summary>
-    /// <returns></returns>
+    /// <inheritdoc/>
     public override string ToString() => $"{ExchangeName} | {RoutingKey}";
 }
