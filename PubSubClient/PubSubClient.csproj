@@ -5,7 +5,7 @@
 	<ImplicitUsings>enable</ImplicitUsings>
 	<Nullable>enable</Nullable>
 	<Description>Common models, interfaces, attributes, and extensions used for adding Message Broker services to applications</Description>
-	<ApplicationVersion>1.0.*</ApplicationVersion>
+	<Version>1.0.0</Version>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	<PackageOutputPath>..\packages</PackageOutputPath>
   </PropertyGroup>
