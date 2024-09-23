@@ -9,17 +9,21 @@ namespace PubSubClient;
 public static class StartupExtensions
 {
     /// <summary>
-    /// Adds consumer service(s) to the application's dependency injection container.
+    /// Adds consumer service(s) and the publisher service to the application's dependency injection container.
     /// </summary>
     /// <typeparam name="TConsumerService">The type of the consumer provider to add, which must implement <see cref="IConsumerService"/>.</typeparam>
+    /// <typeparam name="TPublisherService">The type of the publisher provider to add, which must implement <see cref="IPublisherService"/>.</typeparam>
     /// <param name="builder">The <see cref="IHostApplicationBuilder"/> instance to which the consumer services is added.</param>
     /// <returns>The updated <see cref="IHostApplicationBuilder"/> instance.</returns>
     /// <remarks>
-    /// This method registers the methods marked by <see cref="ConsumerMethodAttribute"/> to the <see cref="AsyncConsumerBackgroundService"/>.
+    /// This method registers the <see cref="AsyncConsumerBackgroundService"/> as a singleton and adds the methods marked by <see cref="ConsumerMethodAttribute"/> to the collection.
+    /// This method registers the <see cref="IPublisherService"/> as a singleton.
     /// </remarks>
-    public static IHostApplicationBuilder AddConsumerServices<TConsumerService>(this IHostApplicationBuilder builder)
-    where TConsumerService : IConsumerService
+    public static IHostApplicationBuilder AddPubSubClient<TConsumerService, TPublisherService>(this IHostApplicationBuilder builder)
+        where TConsumerService : IConsumerService
+        where TPublisherService : class, IPublisherService
     {
+        builder.Services.AddSingleton<IPublisherService, TPublisherService>();
         builder.Services.AddSingleton<AsyncConsumerBackgroundService>();
 
         IEnumerable<MethodInfo>? consumerMethods = Assembly.GetEntryAssembly()?.GetTypes()
@@ -61,23 +65,6 @@ public static class StartupExtensions
 
             return service;
         });
-
-        return builder;
-    }
-
-    /// <summary>
-    /// Adds a publisher service(s) to the application's dependency injection container.
-    /// </summary>
-    /// <typeparam name="TPublisherService">The type of the publisher provider to add, which must implement <see cref="IPublisherService"/>.</typeparam>
-    /// <param name="builder">The <see cref="IHostApplicationBuilder"/> instance to which the publisher service is added.</param>
-    /// <returns>The updated <see cref="IHostApplicationBuilder"/> instance.</returns>
-    /// <remarks>
-    /// This method registers the specified caching provider type <typeparamref name="TPublisherService"/> as a singleton in the service collection.
-    /// </remarks>
-    public static IHostApplicationBuilder AddPublisherService<TPublisherService>(this IHostApplicationBuilder builder)
-        where TPublisherService : class, IPublisherService
-    {
-        builder.Services.AddSingleton<IPublisherService, TPublisherService>();
 
         return builder;
     }
