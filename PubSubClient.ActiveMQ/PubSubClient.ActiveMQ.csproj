@@ -1,21 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
-	<ImplicitUsings>enable</ImplicitUsings>
-	<Nullable>enable</Nullable>
-	<Description>Consumer and Publisher services for adding Apache ActiveMQ Message Broker services to applications</Description>
-	<Version>1.0.1</Version>
-	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<PackageOutputPath>..\packages</PackageOutputPath>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Description>Consumer and Publisher services for adding Apache ActiveMQ Message Broker services to applications</Description>
+		<Version>1.0.1</Version>
+		<PackageProjectUrl>https://github.com/TJPoorman/PubSubClient</PackageProjectUrl>
+		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Copyright>Copyright (c) TJPoorman 2024</Copyright>
+		<PackageTags>pubsub;publish;subscribe;consume;messaging;message-broker;event-driven;microservice;queue;message-queue;activemq</PackageTags>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Apache.NMS.ActiveMQ" Version="2.1.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Apache.NMS.ActiveMQ" Version="2.1.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PubSubClient\PubSubClient.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\PubSubClient\PubSubClient.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
 </Project>

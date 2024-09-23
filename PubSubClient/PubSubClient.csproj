@@ -1,17 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
-	<ImplicitUsings>enable</ImplicitUsings>
-	<Nullable>enable</Nullable>
-	<Description>Common models, interfaces, attributes, and extensions used for adding Message Broker services to applications</Description>
-	<Version>1.0.1</Version>
-	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<PackageOutputPath>..\packages</PackageOutputPath>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Description>Common models, interfaces, attributes, and extensions used for adding Message Broker services to applications</Description>
+		<Version>1.0.1</Version>
+		<PackageProjectUrl>https://github.com/TJPoorman/PubSubClient</PackageProjectUrl>
+		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Copyright>Copyright (c) TJPoorman 2024</Copyright>
+		<PackageTags>pubsub;publish;subscribe;consume;messaging;message-broker;event-driven;microservice;queue;message-queue</PackageTags>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
 </Project>
