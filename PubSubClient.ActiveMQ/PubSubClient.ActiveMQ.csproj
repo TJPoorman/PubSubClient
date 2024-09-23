@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Description>Consumer and Publisher services for adding Apache ActiveMQ Message Broker services to applications</Description>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<PackageProjectUrl>https://github.com/TJPoorman/PubSubClient</PackageProjectUrl>
 		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
