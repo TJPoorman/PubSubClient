@@ -40,8 +40,9 @@ namespace PubSubClient.Tests
         [ClassCleanup]
         public static async Task ClassCleanup()
         {
+            if (host is null) return;
             await host.StopAsync();
-            host?.Dispose();
+            host.Dispose();
         }
 
         [TestMethod]
@@ -63,7 +64,7 @@ namespace PubSubClient.Tests
                 int t = await Helpers.WaitUntil(() => consumer.DefOneOutputObject is not null, timeout: 20000);
                 logger?.LogInformation("Total response time: {TotalTime}", t);
             }
-            catch (TimeoutException te)
+            catch (TimeoutException)
             {
                 Assert.Inconclusive("Failed to receive message within timeout.");
             }
@@ -92,7 +93,7 @@ namespace PubSubClient.Tests
                 int t = await Helpers.WaitUntil(() => consumer.DefOneOutputObject is not null, timeout: 20000);
                 logger?.LogInformation("Total response time: {TotalTime}", t);
             }
-            catch (TimeoutException te)
+            catch (TimeoutException)
             {
                 Assert.Inconclusive("Failed to receive message within timeout.");
             }
@@ -121,7 +122,7 @@ namespace PubSubClient.Tests
                 int t = await Helpers.WaitUntil(() => consumer.DefTwoOutput is not null, timeout: 20000);
                 logger?.LogInformation("Total response time: {TotalTime}", t);
             }
-            catch (TimeoutException te)
+            catch (TimeoutException)
             {
                 Assert.Inconclusive("Failed to receive message within timeout.");
             }
@@ -149,7 +150,7 @@ namespace PubSubClient.Tests
                 int t = await Helpers.WaitUntil(() => consumer.DefTwoOutput is not null, timeout: 20000);
                 logger?.LogInformation("Total response time: {TotalTime}", t);
             }
-            catch (TimeoutException te)
+            catch (TimeoutException)
             {
                 Assert.Inconclusive("Failed to receive message within timeout.");
             }

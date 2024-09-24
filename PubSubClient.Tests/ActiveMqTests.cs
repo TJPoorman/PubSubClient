@@ -60,7 +60,7 @@ namespace PubSubClient.Tests
                 int t = await Helpers.WaitUntil(() => consumer.DefOneOutputObject is not null, timeout: 10000);
                 logger?.LogInformation("Total response time: {TotalTime}", t);
             }
-            catch (TimeoutException te)
+            catch (TimeoutException)
             {
                 Assert.Fail("Failed to receive message within timeout.");
             }
@@ -89,7 +89,7 @@ namespace PubSubClient.Tests
                 int t = await Helpers.WaitUntil(() => consumer.DefOneOutputObject is not null, timeout: 10000);
                 logger?.LogInformation("Total response time: {TotalTime}", t);
             }
-            catch (TimeoutException te)
+            catch (TimeoutException)
             {
                 Assert.Fail("Failed to receive message within timeout.");
             }
@@ -118,7 +118,7 @@ namespace PubSubClient.Tests
                 int t = await Helpers.WaitUntil(() => consumer.DefTwoOutput is not null, timeout: 10000);
                 logger?.LogInformation("Total response time: {TotalTime}", t);
             }
-            catch (TimeoutException te)
+            catch (TimeoutException)
             {
                 Assert.Fail("Failed to receive message within timeout.");
             }
@@ -146,7 +146,7 @@ namespace PubSubClient.Tests
                 int t = await Helpers.WaitUntil(() => consumer.DefTwoOutput is not null, timeout: 10000);
                 logger?.LogInformation("Total response time: {TotalTime}", t);
             }
-            catch (TimeoutException te)
+            catch (TimeoutException)
             {
                 Assert.Fail("Failed to receive message within timeout.");
             }
