@@ -5,11 +5,13 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubSubClient", "PubSubClient\PubSubClient.csproj", "{8C1A6F86-ECD1-48A9-9571-8DCDF1357ABB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubSubClient.RabbitMQ", "PubSubClient.RabbitMQ\PubSubClient.RabbitMQ.csproj", "{BBEEBDFE-AD70-4EED-8D3F-9FBFD0C8CBD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubSubClient.RabbitMQ", "PubSubClient.RabbitMQ\PubSubClient.RabbitMQ.csproj", "{BBEEBDFE-AD70-4EED-8D3F-9FBFD0C8CBD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubSubClient.Kafka", "PubSubClient.Kafka\PubSubClient.Kafka.csproj", "{3FA9D312-2EF1-44A9-B59B-97A4369B3C33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubSubClient.Kafka", "PubSubClient.Kafka\PubSubClient.Kafka.csproj", "{3FA9D312-2EF1-44A9-B59B-97A4369B3C33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubSubClient.ActiveMQ", "PubSubClient.ActiveMQ\PubSubClient.ActiveMQ.csproj", "{500A34EA-FE30-486B-A8CE-90EBC09313B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubSubClient.ActiveMQ", "PubSubClient.ActiveMQ\PubSubClient.ActiveMQ.csproj", "{500A34EA-FE30-486B-A8CE-90EBC09313B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubSubClient.Tests", "PubSubClient.Tests\PubSubClient.Tests.csproj", "{800301E7-3979-45F4-AEBC-A3651455B70A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{500A34EA-FE30-486B-A8CE-90EBC09313B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{500A34EA-FE30-486B-A8CE-90EBC09313B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{500A34EA-FE30-486B-A8CE-90EBC09313B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{800301E7-3979-45F4-AEBC-A3651455B70A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{800301E7-3979-45F4-AEBC-A3651455B70A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{800301E7-3979-45F4-AEBC-A3651455B70A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{800301E7-3979-45F4-AEBC-A3651455B70A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
