@@ -26,9 +26,11 @@ public static class StartupExtensions
         builder.Services.AddSingleton<IPublisherService, TPublisherService>();
         builder.Services.AddSingleton<AsyncConsumerBackgroundService>();
 
-        IEnumerable<MethodInfo>? consumerMethods = Assembly.GetEntryAssembly()?.GetTypes()
+        IEnumerable<MethodInfo>? consumerMethods = AppDomain.CurrentDomain.GetAssemblies()
+            .Where(a => a is not null && a.FullName is not null && !a.FullName.StartsWith("System") && !a.FullName.StartsWith("Microsoft"))
+            .SelectMany(a => a.GetTypes())
             .SelectMany(type => type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
-            .Where(method => method.GetCustomAttributes(typeof(ConsumerMethodAttribute), false).Length != 0));
+                .Where(method => method?.GetCustomAttributes(typeof(ConsumerMethodAttribute), false)?.Length != 0));
 
         foreach (Type? c in consumerMethods?.Select(m => m.DeclaringType)?.Distinct() ?? new List<Type>())
         {
