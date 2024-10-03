@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PubSubClient.ActiveMQ;
 
@@ -58,7 +59,16 @@ public class ActiveMqConsumerService : IConsumerService, IDisposable
         _consumer.Listener += async (m) =>
         {
             var body = m.Body<string>();
-            var obj = JsonSerializer.Deserialize(body, _action.Method.GetParameters()[_twoParam ? 1 : 0].ParameterType);
+            object? obj;
+            try
+            {
+                obj = JsonSerializer.Deserialize(body, _action.Method.GetParameters()[_twoParam ? 1 : 0].ParameterType);
+            }
+            catch
+            {
+                obj = null;
+            }
+
             if (obj is not null)
             {
                 if (!_twoParam)

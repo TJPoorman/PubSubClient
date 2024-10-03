@@ -60,7 +60,16 @@ public class RabbitMqConsumerService : IConsumerService, IDisposable
         {
             var body = ea.Body.ToArray();
             var text = System.Text.Encoding.UTF8.GetString(body);
-            var obj = JsonSerializer.Deserialize(text, _action.Method.GetParameters()[_twoParam ? 1 : 0].ParameterType);
+            object? obj;
+            try
+            {
+                obj = JsonSerializer.Deserialize(text, _action.Method.GetParameters()[_twoParam ? 1 : 0].ParameterType);
+            }
+            catch
+            {
+                obj = null;
+            }
+            
             if (obj is not null)
             {
                 if (!_twoParam)
