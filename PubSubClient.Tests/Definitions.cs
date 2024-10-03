@@ -5,6 +5,7 @@ namespace PubSubClient.Tests;
 internal class TestExchangeBaseDef : MicroServiceDefinitionBase { public override string ExchangeName => "Test"; }
 internal class TestDefinition : TestExchangeBaseDef { }
 internal class TestDefinitionTwo : TestExchangeBaseDef { }
+internal class TestDefinitionThree : TestExchangeBaseDef { }
 
 internal class TestClass
 {
